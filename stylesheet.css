@@ -124,16 +124,30 @@ th {
   padding-right: 1em;
 }
 
-/*th:nth-child(3),
+th:nth-child(1),
+td:nth-child(1) {
+  padding-left: 0.5em;
+}
+
 th:nth-child(4),
 th:nth-child(5),
 th:nth-child(6),
 th:nth-child(7),
 th:nth-child(8),
-th:nth-child(9) {
+th:nth-child(9),
+th:nth-child(10) {
   opacity: 0;
-}*/
+}
 
+th:nth-child(6),
+th:nth-child(8) {
+    width: 1%;
+}
+
+th:nth-child(4),
+th:nth-child(10) {
+    width: 15%;
+}
 
 tbody tr:nth-child(odd) {
   background-color: #f2f2f2;
@@ -143,33 +157,27 @@ tbody tr:hover {
   background-color: #D0D3D4;
 }
 
-#img {
-  width: 5%;
-  opacity: 0;
-}
-
 img {
   width: 25px
 }
 
 th {
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: .5em;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  /*padding-left: .5em;*/
 }
 
 td {
   padding-top: 4px;
   padding-bottom: 4px;
-  padding-left: .5em;
   padding-right: 1em;
-  text-align: left;
+  /*text-align: left;*/
 }
 
-/*td:nth-child(2) {
-  font-weight: 600;
-  text-align: left;
-}*/
+td:nth-child(6),
+td:nth-child(9) {
+  text-align: right;
+}
 
 .link_header:link {
   text-decoration: none;

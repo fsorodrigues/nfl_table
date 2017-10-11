@@ -2,32 +2,33 @@ var calendar = [];
 
 var dataset = [];
 
-var showColumns = ["Dia", "Horário", "week"];
-
 var table;
 var titles;
 var headers;
 var rows;
+var body;
 
 var selectValue;
 
-d3.csv('nfl.csv', function (error, dataIn) {
+d3.csv("nfl.csv", function (error, dataIn) {
     if (error) { throw error };
 
     dataIn.forEach( function(d) {
-      d.Dia = formatTime(d.Dia, "%d/%m/%y", "%d-%b")
+      d.Data = formatTime(d.Data, "%d/%m", "%d-%b")
     });// closing dataset.forEach
 
     // nesting data
     var nestedData = d3.nest()
-                        .key(function(d) { return d.week; })
+                        .key(function(d) { return d.wk; })
                         .sortValues(function(d,i) { return parseFloat(d.Horário) - parseFloat(i.Horário); }) //sort ascending by time
-                        .sortValues(function(d,i) { return parseFloat(d.Dia) - parseFloat(i.Dia); }) //sort ascending by date
+                        .sortValues(function(d,i) { return parseFloat(d.Data) - parseFloat(i.Data); }) //sort ascending by date
                         .entries(dataIn);
 
     dataset = nestedData;
 
     var initialData = updateData(1);
+
+    console.log(updateData(2));
 
     var menu = d3.select(".content")
                    .append("select")
@@ -57,43 +58,65 @@ function formatTime(input, formatInput, formatOutput) {
 
 function drawTable(data) {
 
-    headers = table.append('thead')
-                       .append('tr')
-                       .selectAll('th')
+    headers = table.append("thead")
+                       .append("tr")
+                       .selectAll("th")
                        .data(titles)
                        .enter()
-                       .append('th')
+                       .append("th")
                        .text(function (d) { return d; })
 
-    rows = table.append('tbody')
-                  .selectAll('tr')
-                  .data(data)
-                  .enter()
-                  .append('tr');
+    body = table.append("tbody");
 
-           rows.selectAll('td')
+    rows = body.selectAll("tr")
+                .data(data)
+                .enter()
+                .append("tr");
+
+           rows.selectAll("td")
                    .data(function (d) {
                         return titles.map(function (k) {
                             return { "value": d[k], "name": k};
                                        });
                        })
                   .enter()
-                  .append('td')
-                  .text(function (d) { return d.value; });
+                  .append("td")
+                  .html(function (d) { return d.value; });
 };
 
 function updateTable(data) {
 
-  rows = table.selectAll('tr')
-                .data(data);
+  var selection = body.selectAll("tr")
+                      .data(data);
 
-         rows.selectAll('td')
-                 .data(function (d) {
-                      return titles.map(function (k) {
-                          return { "value": d[k], "name": k};
-                                     });
+  // update
+  rows.selectAll("td")
+        .data(function (d) {
+              return titles.map(function (k) {
+                return { "value": d[k], "name": k};
+                     });
+                   })
+        .html(function(d) { return d.value; });
+
+  // enter
+  var newRow = selection.enter()
+                        .append("tr");
+
+  newRow.selectAll("td")
+          .data(function (d) {
+                return titles.map(function (k) {
+                  return { "value": d[k], "name": k};
+                       });
                      })
-                .text(function (d) { return d.value; });
+          .enter()
+          .append("td")
+          .html(function(d) { return d.value });
+
+  // exit, remove
+  selection.exit().remove();
+
+
+
 };
 
 function updateData(selectedWeek) {
@@ -102,7 +125,7 @@ function updateData(selectedWeek) {
 };
 
 function option() {
-    selectValue = d3.select(this).property('value')
+    selectValue = d3.select(this).property("value")
     newData = updateData(selectValue);
     updateTable(newData);
 };
