@@ -90,8 +90,8 @@ function updateTable(data) {
                       .data(data);
 
   // update
-  rows.selectAll("td")
-        .data(function (d) {
+  selection.selectAll("td")
+            .data(function (d) {
               return titles.map(function (k) {
                 return { "value": d[k], "name": k};
                      });
