@@ -115,8 +115,6 @@ function updateTable(data) {
   // exit, remove
   selection.exit().remove();
 
-
-
 };
 
 function updateData(selectedWeek) {
