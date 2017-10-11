@@ -9,6 +9,8 @@ var titles;
 var headers;
 var rows;
 
+var selectValue;
+
 d3.csv('nfl.csv', function (error, dataIn) {
     if (error) { throw error };
 
@@ -100,8 +102,7 @@ function updateData(selectedWeek) {
 };
 
 function option() {
-    var selectValue = d3.select('select').property('value')
-    dataset = updateData(selectValue);
-    updateTable(dataset);
-
+    selectValue = d3.select(this).property('value')
+    newData = updateData(selectValue);
+    updateTable(newData);
 };
