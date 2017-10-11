@@ -1,4 +1,4 @@
-wk,Data,Horário,Mandante,img1,r1,-,r2,img2,Visitante,Estádio,Transmissão,,,,,,,,,,,,,,,,,
+wk,Data,Hora,Mandante,img1,r1,-,r2,img2,Visitante,Estádio,Transmissão,,,,,,,,,,,,,,,,,
 1,07/09,08:30,New England Patriots,<img src="./img/patriots.png" />,27,x,42,<img src="./img/chiefs.png" />,Kansas City Chiefs,Gillette Stadium,,,,,,,,,,,,,,,,,,
 1,10/09,01:00,Cincinnati Bengals,<img src="./img/bengals.png" />,0,x,20,<img src="./img/ravens.png" />,Baltimore Ravens,Paul Brown Stadium,,,,,,,,,,,,,,,,,,
 1,10/09,01:00,Houston Texans,<img src="./img/texans.png" />,7,x,29,<img src="./img/jaguars.png" />,Jacksonville Jaguars,NRG Stadium,,,,,,,,,,,,,,,,,,

@@ -20,7 +20,7 @@ d3.csv("nfl.csv", function (error, dataIn) {
     // nesting data
     var nestedData = d3.nest()
                         .key(function(d) { return d.wk; })
-                        .sortValues(function(d,i) { return parseFloat(d.Horário) - parseFloat(i.Horário); }) //sort ascending by time
+                        .sortValues(function(d,i) { return parseFloat(d.Hora) - parseFloat(i.Hora); }) //sort ascending by time
                         .sortValues(function(d,i) { return parseFloat(d.Data) - parseFloat(i.Data); }) //sort ascending by date
                         .entries(dataIn);
 
