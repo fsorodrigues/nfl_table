@@ -1,5 +1,3 @@
-var calendar = [];
-
 var dataset = [];
 
 var table;
@@ -10,11 +8,13 @@ var body;
 
 var selectValue;
 
+var currentWeek = 7;
+
 d3.csv("nfl.csv", function (error, dataIn) {
     if (error) { throw error };
 
     dataIn.forEach( function(d) {
-      d.Data = formatTime(d.Data, "%d/%m", "%d-%b")
+      d.Data = formatTime(d.Data, "%d/%m", "%d-%m")
     });// closing dataset.forEach
 
     // nesting data
@@ -26,9 +26,7 @@ d3.csv("nfl.csv", function (error, dataIn) {
 
     dataset = nestedData;
 
-    var initialData = updateData(1);
-
-    console.log(updateData(2));
+    var initialData = updateData(currentWeek);
 
     var menu = d3.select(".content")
                    .append("select")
@@ -40,7 +38,11 @@ d3.csv("nfl.csv", function (error, dataIn) {
               .enter()
               .append("option")
               .text(function(d) { return d.key })
-              .attr("value", function(d) { return +d.key });
+              .attr("value", function(d) { return +d.key })
+              .attr("id", function(d) { return "num" + d.key});
+
+        d3.select("#num" + currentWeek)
+          .attr("selected", "selected");
 
     table = d3.select(".content").append("table");
 
